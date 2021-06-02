@@ -31,3 +31,28 @@ function buildCharts(selection) {
 
     // Read json data
     d3.json("samples.json").then((sampleData) => {
+// Parse and filter the data to get the sample's OTU data
+        // Pay attention to what data is required for each chart
+        var parsedData = sampleData.samples;
+        console.log("parsed data inside buildCharts function")
+        console.log(parsedData);
+
+        var sampleDict = parsedData.filter(item => item.id == selection)[0];
+        console.log("sampleDict")
+        console.log(sampleDict);
+
+
+        var sampleValues = sampleDict.sample_values; 
+        var barChartValues = sampleValues.slice(0, 10).reverse();
+        console.log("sample_values")
+        console.log(barChartValues);
+
+        var idValues = sampleDict.otu_ids;
+        var barChartLabels = idValues.slice(0, 10).reverse();
+        console.log("otu_ids");
+        console.log(barChartLabels);
+
+        var reformattedLabels = [];
+        barChartLabels.forEach((label) => {
+            reformattedLabels.push("OTU " + label);
+        }); 
