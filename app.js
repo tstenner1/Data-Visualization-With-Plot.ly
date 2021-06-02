@@ -25,3 +25,9 @@ function buildMetadata(selection) {
         console.log(metadata);
     });
 }
+
+// function that will create charts for sample
+function buildCharts(selection) {
+
+    // Read json data
+    d3.json("samples.json").then((sampleData) => {
