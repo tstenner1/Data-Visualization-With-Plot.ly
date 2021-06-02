@@ -78,3 +78,32 @@ function buildCharts(selection) {
         var barChartData = [barChartTrace];
 
         Plotly.newPlot("bar", barChartData);
+
+         // Create bubble chart in correct location
+
+         var bubbleChartTrace = {
+            x: idValues,
+            y: sampleValues,
+            text: hovertext,
+            mode: "markers",
+            marker: {
+                color: idValues,
+                size: sampleValues
+            }
+        };
+
+        var bubbleChartData = [bubbleChartTrace];
+
+        var layout = {
+            showlegend: false,
+            height: 600,
+            width: 1000,
+            xaxis: {
+                title: "OTU ID"
+            }
+        };
+
+        Plotly.newPlot("bubble", bubbleChartData, layout);
+    });
+}
+
