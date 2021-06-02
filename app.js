@@ -56,3 +56,25 @@ function buildCharts(selection) {
         barChartLabels.forEach((label) => {
             reformattedLabels.push("OTU " + label);
         }); 
+
+        console.log("reformatted");
+        console.log(reformattedLabels);
+
+        var hovertext = sampleDict.otu_labels;
+        var barCharthovertext = hovertext.slice(0, 10).reverse();
+        console.log("otu_labels");
+        console.log(barCharthovertext);
+
+        // bar chart in correct location
+
+        var barChartTrace = {
+            type: "bar",
+            y: reformattedLabels,
+            x: barChartValues,
+            text: barCharthovertext,
+            orientation: 'h'
+        };
+
+        var barChartData = [barChartTrace];
+
+        Plotly.newPlot("bar", barChartData);
