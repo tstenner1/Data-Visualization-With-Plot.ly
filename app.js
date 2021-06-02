@@ -132,3 +132,14 @@ function init() {
 
     });
 }
+
+function optionChanged(newSelection) {
+
+    // Update metadata with newly selected sample
+    buildMetadata(newSelection); 
+    // Update charts with newly selected sample
+    buildCharts(newSelection);
+}
+
+// Initialize dashboard on page load
+init();
