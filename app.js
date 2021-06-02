@@ -6,16 +6,16 @@ function buildMetadata(selection) {
 
         console.log(sampleData);
     // Parse and filter the data for sample metadata
-        var parsedData = sampleData.metadata;
+        let parsedData = sampleData.metadata;
         console.log("parsed data inside buildMetadata function")
         console.log(parsedData);
 
-        var sample = parsedData.filter(item => item.id == selection);
+        let sample = parsedData.filter(item => item.id == selection);
         console.log("showing sample[0]:");
         console.log(sample[0]);
 
         // Specify location of the metadata & update 
-        var metadata = d3.select("#sample-metadata").html("");
+        let metadata = d3.select("#sample-metadata").html("");
 
         Object.entries(sample[0]).forEach(([key, value]) => {
             metadata.append("p").text(`${key}: ${value}`);
@@ -33,26 +33,26 @@ function buildCharts(selection) {
     d3.json("samples.json").then((sampleData) => {
 // Parse and filter the data to get the sample's OTU data
         // Pay attention to what data is required for each chart
-        var parsedData = sampleData.samples;
+        let parsedData = sampleData.samples;
         console.log("parsed data inside buildCharts function")
         console.log(parsedData);
 
-        var sampleDict = parsedData.filter(item => item.id == selection)[0];
+        let sampleDict = parsedData.filter(item => item.id == selection)[0];
         console.log("sampleDict")
         console.log(sampleDict);
 
 
-        var sampleValues = sampleDict.sample_values; 
-        var barChartValues = sampleValues.slice(0, 10).reverse();
+        let sampleValues = sampleDict.sample_values; 
+        let barChartValues = sampleValues.slice(0, 10).reverse();
         console.log("sample_values")
         console.log(barChartValues);
 
-        var idValues = sampleDict.otu_ids;
-        var barChartLabels = idValues.slice(0, 10).reverse();
+        let idValues = sampleDict.otu_ids;
+        let barChartLabels = idValues.slice(0, 10).reverse();
         console.log("otu_ids");
         console.log(barChartLabels);
 
-        var reformattedLabels = [];
+        let reformattedLabels = [];
         barChartLabels.forEach((label) => {
             reformattedLabels.push("OTU " + label);
         }); 
@@ -60,14 +60,14 @@ function buildCharts(selection) {
         console.log("reformatted");
         console.log(reformattedLabels);
 
-        var hovertext = sampleDict.otu_labels;
-        var barCharthovertext = hovertext.slice(0, 10).reverse();
+        let hovertext = sampleDict.otu_labels;
+        let barCharthovertext = hovertext.slice(0, 10).reverse();
         console.log("otu_labels");
         console.log(barCharthovertext);
 
         // bar chart in correct location
 
-        var barChartTrace = {
+        let barChartTrace = {
             type: "bar",
             y: reformattedLabels,
             x: barChartValues,
@@ -75,13 +75,13 @@ function buildCharts(selection) {
             orientation: 'h'
         };
 
-        var barChartData = [barChartTrace];
+        let barChartData = [barChartTrace];
 
         Plotly.newPlot("bar", barChartData);
 
          // Create bubble chart in correct location
 
-         var bubbleChartTrace = {
+        let bubbleChartTrace = {
             x: idValues,
             y: sampleValues,
             text: hovertext,
@@ -92,9 +92,9 @@ function buildCharts(selection) {
             }
         };
 
-        var bubbleChartData = [bubbleChartTrace];
+        let bubbleChartData = [bubbleChartTrace];
 
-        var layout = {
+        let layout = {
             showlegend: false,
             height: 600,
             width: 1000,
@@ -114,12 +114,12 @@ function init() {
     d3.json("samples.json").then((sampleData) => {
 
         // Parse & filter data for sample names
-        var parsedData = sampleData.names;
+        let parsedData = sampleData.names;
         console.log("parsed data inside init function")
         console.log(parsedData);
 
         // Add dropdown option samples
-        var dropdownMenu = d3.select("#selDataset");
+        let dropdownMenu = d3.select("#selDataset");
 
         parsedData.forEach((name) => {
             dropdownMenu.append("option").property("value", name).text(name);
