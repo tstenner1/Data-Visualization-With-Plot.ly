@@ -13,3 +13,15 @@ function buildMetadata(selection) {
         var sample = parsedData.filter(item => item.id == selection);
         console.log("showing sample[0]:");
         console.log(sample[0]);
+
+        // Specify location of the metadata & update 
+        var metadata = d3.select("#sample-metadata").html("");
+
+        Object.entries(sample[0]).forEach(([key, value]) => {
+            metadata.append("p").text(`${key}: ${value}`);
+        });
+
+        console.log("next again");
+        console.log(metadata);
+    });
+}
